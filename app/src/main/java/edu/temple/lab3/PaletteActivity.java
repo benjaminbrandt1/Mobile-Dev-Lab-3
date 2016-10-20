@@ -1,26 +1,57 @@
 package edu.temple.lab3;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-public class PaletteActivity extends AppCompatActivity {
+public class PaletteActivity extends Fragment {
+    String[] colorLabels;
+    ColorAdapter adapter;
+    ColorChangeInterface activity;
+
+
+
+    public static PaletteActivity newInstance() {
+        return new PaletteActivity();
+    }
+
+    public PaletteActivity() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_palette);
-
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (ColorChangeInterface)activity;
         Resources res = PaletteActivity.this.getResources();
-        String[] colorLabels = res.getStringArray(R.array.colors);
+        colorLabels = res.getStringArray(R.array.colors);
+        adapter = new ColorAdapter(activity, colorLabels);
+    }
 
-        Spinner spinner = (Spinner)findViewById(R.id.colorSpinner);
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        activity = null;
 
-        ColorAdapter adapter = new ColorAdapter(PaletteActivity.this, colorLabels);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.activity_palette, container, false);
+
+        Spinner spinner = (Spinner)v.findViewById(R.id.colorSpinner);
 
         spinner.setAdapter(adapter);
 
@@ -30,9 +61,7 @@ public class PaletteActivity extends AppCompatActivity {
                 if(position == 0){
 
                 } else {
-                    Intent intent = new Intent(PaletteActivity.this, CanvasActivity.class);
-                    intent.putExtra("color", (new Integer(position)).toString());
-                    startActivity(intent);
+                    activity.changeColor(position);
                 }
             }
 
@@ -42,6 +71,13 @@ public class PaletteActivity extends AppCompatActivity {
             }
         });
 
+        return v;
+    }
+
+    public interface ColorChangeInterface{
+        public void changeColor(int colorPosition);
 
     }
+
+
 }

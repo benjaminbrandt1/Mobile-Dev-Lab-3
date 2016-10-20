@@ -40,13 +40,6 @@ public class ColorAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View oldView, ViewGroup parent){
-        LinearLayout layout;
-
-        if(oldView!=null) {
-            layout = (LinearLayout) oldView;
-        } else {
-            layout = new LinearLayout(mContext);
-        }
 
         TextView color = new TextView(mContext);
         color.setText(colors[position]);
@@ -57,8 +50,8 @@ public class ColorAdapter extends BaseAdapter {
         }
         color.setTextSize(32);
 
-        layout.addView(color);
-        return layout;
+
+        return color;
 
     }
 
