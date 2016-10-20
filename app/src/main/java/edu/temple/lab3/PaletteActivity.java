@@ -1,6 +1,7 @@
 package edu.temple.lab3;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,28 +15,23 @@ public class PaletteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_palette);
 
-        String[] colors = new String[6];
-        colors[0] = "-- Select One --";
-        colors[1] = "blue";
-        colors[2] = "green";
-        colors[3] = "magenta";
-        colors[4] = "cyan";
-        colors[5] = "red";
+        Resources res = PaletteActivity.this.getResources();
+        String[] colorLabels = res.getStringArray(R.array.colors);
 
         Spinner spinner = (Spinner)findViewById(R.id.colorSpinner);
 
-        ColorAdapter adapter = new ColorAdapter(PaletteActivity.this, colors);
+        ColorAdapter adapter = new ColorAdapter(PaletteActivity.this, colorLabels);
 
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(parent.getItemAtPosition(position).toString().equals("-- Select One --")){
+                if(position == 0){
 
                 } else {
                     Intent intent = new Intent(PaletteActivity.this, CanvasActivity.class);
-                    intent.putExtra("color", parent.getItemAtPosition(position).toString());
+                    intent.putExtra("color", (new Integer(position)).toString());
                     startActivity(intent);
                 }
             }

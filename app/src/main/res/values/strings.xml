@@ -1,3 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Lab3</string>
+    <string name="app_name">Palette App</string>
+    <string-array name="colors">
+        <item>-- Select One --</item>
+        <item>blue</item>
+        <item>green</item>
+        <item>magenta</item>
+        <item>cyan</item>
+        <item>red</item>
+    </string-array>
 </resources>

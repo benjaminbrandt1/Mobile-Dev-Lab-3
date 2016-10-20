@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class ColorAdapter extends BaseAdapter {
     private Context mContext;
     private final String[] colors;
+    String realColors[] = {"--Select One --", "blue", "green", "magenta", "cyan", "red"};
 
     public ColorAdapter(Context c, String[] colors){
         mContext = c;
@@ -50,7 +51,7 @@ public class ColorAdapter extends BaseAdapter {
         TextView color = new TextView(mContext);
         color.setText(colors[position]);
         try {
-            color.setBackgroundColor(Color.parseColor(colors[position]));
+            color.setBackgroundColor(Color.parseColor(realColors[position]));
         } catch (Exception e) {
             color.setBackgroundColor(Color.WHITE);
         }
