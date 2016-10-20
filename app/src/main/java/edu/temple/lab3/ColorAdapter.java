@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,8 +41,9 @@ public class ColorAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View oldView, ViewGroup parent){
-
+        AbsListView.LayoutParams params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT);
         TextView color = new TextView(mContext);
+        color.setLayoutParams(params);
         color.setText(colors[position]);
         try {
             color.setBackgroundColor(Color.parseColor(realColors[position]));

@@ -51,7 +51,7 @@ public class PaletteActivity extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.activity_palette, container, false);
 
-        Spinner spinner = (Spinner)v.findViewById(R.id.colorSpinner);
+        final Spinner spinner = (Spinner)v.findViewById(R.id.colorSpinner);
 
         spinner.setAdapter(adapter);
 
@@ -61,6 +61,7 @@ public class PaletteActivity extends Fragment {
                 if(position == 0){
 
                 } else {
+                    spinner.setSelection(0);
                     activity.changeColor(position);
                 }
             }
