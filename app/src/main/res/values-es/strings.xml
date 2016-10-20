@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">La Paleta App</string>
+    <string-array name="colors">
+        <item>-- Escoja Un --</item>
+        <item>azul</item>
+        <item>verde</item>
+        <item>magenta</item>
+        <item>cian</item>
+        <item>rojo</item>
+    </string-array>
+</resources>
