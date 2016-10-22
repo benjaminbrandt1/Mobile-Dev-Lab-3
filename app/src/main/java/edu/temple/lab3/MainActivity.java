@@ -5,11 +5,10 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements PaletteActivity.ColorChangeInterface {
-    CanvasActivity canvasActivity;
-    PaletteActivity paletteActivity;
+public class MainActivity extends AppCompatActivity implements PaletteFragment.ColorChangeInterface {
+    CanvasFragment canvasActivity;
+    PaletteFragment paletteFragment;
     boolean twoPane;
 
     @Override
@@ -18,16 +17,12 @@ public class MainActivity extends AppCompatActivity implements PaletteActivity.C
         setContentView(R.layout.activity_main);
 
         twoPane = (findViewById(R.id.fragment_canvas) != null);
-        canvasActivity = CanvasActivity.newInstance();
-        paletteActivity = PaletteActivity.newInstance();
+        canvasActivity = CanvasFragment.newInstance();
+        paletteFragment = PaletteFragment.newInstance();
 
-        load(paletteActivity, R.id.fragment_palette, false);
+        load(paletteFragment, R.id.fragment_palette, false);
 
-
-        /*
-         *  Check if details pain is visible in current layout (e.g. large or landscape)
-         *  and load fragment if true.
-         */
+        //Check to see if two fragments can be displayed
         if (twoPane){
             load(canvasActivity, R.id.fragment_canvas, false);
         }

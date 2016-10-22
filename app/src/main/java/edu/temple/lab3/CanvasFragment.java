@@ -9,15 +9,15 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 
-public class CanvasActivity extends Fragment {
+public class CanvasFragment extends Fragment {
     RelativeLayout layout;
     String[] colors;
 
-    public static CanvasActivity newInstance() {
-        return new CanvasActivity();
+    public static CanvasFragment newInstance() {
+        return new CanvasFragment();
     }
 
-    public CanvasActivity() {
+    public CanvasFragment() {
         // Required empty public constructor
     }
 
@@ -29,13 +29,8 @@ public class CanvasActivity extends Fragment {
 
         colors = new String[]{"--Select One --", "blue", "green", "magenta", "cyan", "red"};
 
-        /*Resources res = CanvasActivity.this.getResources();
-        String[] colorLabels = res.getStringArray(R.array.colors);*/
-
         layout = (RelativeLayout)v.findViewById(R.id.layout);
 
-        /*getSupportActionBar().setTitle(colorLabels[pointer].toUpperCase());
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(colors[pointer])));*/
         return v;
     }
 

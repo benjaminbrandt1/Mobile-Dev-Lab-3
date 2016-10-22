@@ -2,38 +2,41 @@ package edu.temple.lab3;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-public class PaletteActivity extends Fragment {
+public class PaletteFragment extends Fragment {
     String[] colorLabels;
     ColorAdapter adapter;
     ColorChangeInterface activity;
 
 
 
-    public static PaletteActivity newInstance() {
-        return new PaletteActivity();
+    public static PaletteFragment newInstance() {
+        return new PaletteFragment();
     }
 
-    public PaletteActivity() {
+    public PaletteFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.activity = (ColorChangeInterface)activity;
-        Resources res = PaletteActivity.this.getResources();
+        //Make sure the activity implements ColorChangeInterface
+        try {
+            this.activity = (ColorChangeInterface)activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement ColorChangeInterface");
+        }
+        //Get the array of colors and create an adapter
+        Resources res = PaletteFragment.this.getResources();
         colorLabels = res.getStringArray(R.array.colors);
         adapter = new ColorAdapter(activity, colorLabels);
     }
@@ -76,7 +79,7 @@ public class PaletteActivity extends Fragment {
     }
 
     public interface ColorChangeInterface{
-        public void changeColor(int colorPosition);
+        void changeColor(int colorPosition);
 
     }
 
